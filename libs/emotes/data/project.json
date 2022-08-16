@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/emotes/data/src",
+  "prefix": "nx-twitch",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/emotes/data"],
+      "options": {
+        "jestConfig": "libs/emotes/data/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/emotes/data/**/*.ts",
+          "libs/emotes/data/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

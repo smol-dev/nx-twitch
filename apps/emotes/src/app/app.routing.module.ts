@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {
     path: 'emotes',
-    loadChildren: () => import('@nx-emote-list').then((m) => m.EmoteListModule),
+    loadChildren: () => import('@nxt-emotes/feature').then((m) => m.EmotesFeatureModule),
   },
   { path: '', redirectTo: 'emotes', pathMatch: 'full' },
   { path: '**', redirectTo: 'emotes' },
