@@ -2,6 +2,7 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
+    "emote-list": "libs/emote-list",
     "emotes": "apps/emotes",
     "emotes-e2e": "apps/emotes-e2e"
   }
