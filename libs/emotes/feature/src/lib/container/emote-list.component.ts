@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { fromEmote } from '@nxt-emotes/data';
 
 @Component({
   selector: 'nx-twitch-emote-list',
@@ -6,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./emote-list.component.scss'],
 })
 export class EmoteListComponent implements OnInit {
-  constructor() {}
+  emotes$ = this.store.select(fromEmote.selectAll);
+
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
-    console.log("yoyoyo")
+    console.log('yoyoyo');
   }
 }

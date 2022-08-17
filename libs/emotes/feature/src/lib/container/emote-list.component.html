@@ -1,1 +1,3 @@
-<p>emote-list works!</p>
+<main *ngIf="emotes$|async as emotes">
+    <li *ngFor="let emote of emotes">{{emote.name}}</li>
+</main>
