@@ -4,12 +4,12 @@ import { EmoteListComponent } from './container/emote-list.component';
 import { RouterModule, Routes } from '@angular/router';
 import { EmotesDataModule } from '@nxt-emotes/data';
 import { EmotesUiModule } from '@nxt-emotes/ui';
-import { ReactiveFormsModule } from '@angular/forms';
-import { DataGuard } from './data.guard';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+// import { DataGuard } from './data.guard';
 
 const routes: Routes = [
   {
-    canActivate: [DataGuard],
+    // canActivate: [DataGuard],
     path: '',
     pathMatch: 'full',
     component: EmoteListComponent,
@@ -19,6 +19,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     EmotesDataModule,
     EmotesUiModule,
     ReactiveFormsModule,

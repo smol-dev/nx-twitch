@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
@@ -10,6 +10,7 @@ import {
   Emote7Tv,
   BttvResponse,
   UiEmote,
+  UiUser,
 } from '@nxt-emotes/model';
 
 export const FFZ_URL = 'https://api.frankerfacez.com/v1';
@@ -21,6 +22,16 @@ export const SEVENTV_URL = 'https://api.7tv.app/v2';
 })
 export class EmoteService {
   constructor(private http: HttpClient) {}
+
+  getUser(username: string): Observable<UiUser> {
+    // const url = `https://api.twitch.tv/helix/users?login=${username}`;
+    // const headers = new HttpHeaders().append(
+    //   'Client-Id',
+    //   'qz530ybtrsnx39qp9n930ppctsb6to'
+    // );
+    // return this.http.get<UiUser>(url, { headers });
+    return of({id : '39885827', name: 'dajkshd' } as UiUser);
+  }
 
   getFfz(channel: string): Observable<UiEmote[]> {
     return this.http.get<FFZResponse>(`${FFZ_URL}/room/${channel}`).pipe(

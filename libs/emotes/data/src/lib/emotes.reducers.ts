@@ -1,12 +1,13 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { UiEmote } from '@nxt-emotes/model';
-import { EmoteActions } from './emotes.actions';
+import { UiEmote, UiUser } from '@nxt-emotes/model';
+import { EmoteActions, UserActions } from './emotes.actions';
 
 export const emoteFeatureKey = 'Emote';
 
 export interface State {
   loadStatus: 'NOT_LOADED' | 'LOADING' | 'LOADED';
   emotes: UiEmote[];
+  user: UiUser;
   // groupedEmotes: {
   //   bttv: UiEmote[];
   //   sevenTv: UiEmote[];
@@ -21,6 +22,7 @@ export interface EmoteAppState {
 export const initialState: State = {
   loadStatus: 'NOT_LOADED',
   emotes: [],
+  user: {} as UiUser,
   // groupedEmotes: {
   //   bttv: [],
   //   sevenTv: [],
@@ -38,6 +40,17 @@ const EmoteReducer = createReducer<State>(
     ...state,
     loadStatus: 'LOADED',
     emotes,
+  })),
+
+  on(UserActions.loadUser, (state) => ({
+    ...state,
+    loadStatus: 'LOADING',
+  })),
+
+  on(UserActions.loadedUser, (state, { user }) => ({
+    ...state,
+    loadStatus: 'LOADED',
+    user,
   }))
 );
 

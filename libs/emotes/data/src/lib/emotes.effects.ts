@@ -7,11 +7,11 @@ import {
   concatMap,
   filter,
   map,
-  shareReplay,
   switchMap,
+  tap,
   withLatestFrom,
 } from 'rxjs/operators';
-import { EmoteActions } from './emotes.actions';
+import { EmoteActions, UserActions } from './emotes.actions';
 import { EmoteAppState } from './emotes.reducers';
 import { fromEmote } from './emotes.selectors';
 import { EmoteService } from './emotes.service';
@@ -40,25 +40,49 @@ export class EmoteEffects {
   loadEmotes$ = createEffect(() =>
     this.actions$.pipe(
       ofType(EmoteActions.load),
-      switchMap(() =>
+      withLatestFrom(this.store.select(fromEmote.selectUser)),
+      tap(console.debug),
+      // filter((user) => user !== null),
+      switchMap(([, user]) =>
         forkJoin([
-          this.service.getBttv('39885827').pipe(
-            shareReplay(),
-            catchError((error) => of(error))
-          ),
-          this.service.getSevenTv('39885827').pipe(
-            shareReplay(),
-            catchError((error) => of(error))
-          ),
-          this.service.getFfz('39885827').pipe(
-            shareReplay(),
-            catchError((error) => of(error))
-          ),
+          this.service.getBttv(user.id).pipe(catchError((error) => of(error))),
+          this.service
+            .getSevenTv(user.id)
+            .pipe(catchError((error) => of(error))),
+          this.service.getFfz(user.id).pipe(catchError((error) => of(error))),
         ])
       ),
       map(([bttv, seventv, ffz]) => [...bttv, ...seventv, ...ffz]),
       map((emotes) => EmoteActions.loaded({ emotes }))
       // map(([bttv, sevenTv, ffz]) => EmoteActions.loaded({ groupedEmotes: { bttv, sevenTv, ffz } }))
+    )
+  );
+
+  getUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserActions.getUser),
+      concatMap((action) =>
+        of(action).pipe(
+          withLatestFrom(this.store.select(fromEmote.selectLoadStatus))
+        )
+      ),
+      filter(([, loadStatus]) => loadStatus === 'NOT_LOADED'),
+      map(([{ username }]) => UserActions.loadUser({ username }))
+    )
+  );
+
+  loadUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserActions.loadUser),
+      switchMap((action) => this.service.getUser(action.username)),
+      map((user) => UserActions.loadedUser({ user }))
+    )
+  );
+
+  userLoaded$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserActions.loadedUser),
+      map(() => EmoteActions.load())
     )
   );
 }
