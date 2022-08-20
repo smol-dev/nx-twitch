@@ -18,7 +18,8 @@
       "@nxt-emotes/data": ["libs/emotes/data/src/index.ts"],
       "@nxt-emotes/feature": ["libs/emotes/feature/src/index.ts"],
       "@nxt-emotes/model": ["libs/emotes/model/src/index.ts"],
-      "@nxt-emotes/ui": ["libs/emotes/ui/src/index.ts"]
+      "@nxt-emotes/ui": ["libs/emotes/ui/src/index.ts"],
+      "@nxt/environment": ["libs/environment/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

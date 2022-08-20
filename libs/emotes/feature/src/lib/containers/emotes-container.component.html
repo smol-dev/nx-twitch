@@ -1,0 +1,15 @@
+<main class="bg-rose-500 grid place-items-center min-h-screen ">
+    <nav class="min-w-full sticky top-0 h-[10vh] bg-rose-500">
+        <nx-twitch-user-card [user]="user$|async" [loadStatus]="(loadStatus$|async)!" (search)="search($event)">
+        </nx-twitch-user-card>
+    </nav>
+
+
+    <section class="min-w-full h-[80vh] overflow-auto ">
+        <router-outlet></router-outlet>
+    </section>
+
+    <nav class="min-w-full sticky top-0 h-[10vh] bg-rose-500">
+        <h2>FOOTER</h2>
+    </nav>
+</main>

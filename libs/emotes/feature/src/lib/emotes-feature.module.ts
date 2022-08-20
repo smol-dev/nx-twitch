@@ -1,18 +1,28 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EmoteListComponent } from './container/emote-list.component';
+import {
+  EmotesContainerComponent,
+} from './containers/emotes-container.component';
 import { RouterModule, Routes } from '@angular/router';
-import { EmotesDataModule } from '@nxt-emotes/data';
+import { EmotesDataModule, UsersDataModule } from '@nxt-emotes/data';
 import { EmotesUiModule } from '@nxt-emotes/ui';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SelectedUserGuard } from './data.guard';
+import { UserCardComponent } from './components/user-card/user-card.component';
+import { EmoteListComponent } from './containers/emote-list/emote-list.component';
 // import { DataGuard } from './data.guard';
 
 const routes: Routes = [
   {
-    // canActivate: [DataGuard],
     path: '',
-    pathMatch: 'full',
-    component: EmoteListComponent,
+    component: EmotesContainerComponent,
+    children: [
+      {
+        canActivate: [SelectedUserGuard],
+        path: ':username',
+        component: EmoteListComponent,
+      },
+    ],
   },
 ];
 
@@ -21,11 +31,16 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     EmotesDataModule,
+    UsersDataModule,
     EmotesUiModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
   ],
-  declarations: [EmoteListComponent],
+  declarations: [
+    EmotesContainerComponent,
+    EmoteListComponent,
+    UserCardComponent,
+  ],
   providers: [],
 })
 export class EmotesFeatureModule {}

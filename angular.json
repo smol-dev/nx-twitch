@@ -7,6 +7,7 @@
     "emotes-e2e": "apps/emotes-e2e",
     "emotes-feature": "libs/emotes/feature",
     "emotes-model": "libs/emotes/model",
-    "emotes-ui": "libs/emotes/ui"
+    "emotes-ui": "libs/emotes/ui",
+    "environment": "libs/environment"
   }
 }

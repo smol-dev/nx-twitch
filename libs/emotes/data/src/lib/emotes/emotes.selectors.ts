@@ -1,8 +1,8 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { UiEmote } from '@nxt-emotes/model';
-import { emoteFeatureKey, State } from './emotes.reducers';
+import { emoteFeatureKey, EmoteState } from './emotes.reducers';
 
-const selectEmoteState = createFeatureSelector<State>(emoteFeatureKey);
+const selectEmoteState = createFeatureSelector<EmoteState>(emoteFeatureKey);
 
 const selectAll = createSelector(selectEmoteState, (state) => state.emotes);
 
@@ -21,12 +21,9 @@ const isLoaded = createSelector(
   (loadStatus) => loadStatus === 'LOADED'
 );
 
-const selectUser = createSelector(selectEmoteState, (state) => state.user);
-
 export const fromEmote = {
   selectAll,
   selectById,
   selectLoadStatus,
   isLoaded,
-  selectUser,
 };

@@ -12,9 +12,9 @@ export class EmoteButtonComponent implements OnInit {
   get size(): string {
     switch (this.emote.type) {
       case 'ffz':
-        return '1';
+        return '3';
       default:
-        return '1x';
+        return '3x';
     }
   }
 

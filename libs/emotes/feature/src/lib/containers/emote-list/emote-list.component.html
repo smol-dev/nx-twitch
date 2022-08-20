@@ -1,0 +1,7 @@
+<h2 *ngIf="loadStatus$|async as status">loading: {{status}}</h2>
+
+<ng-container *ngIf="emotes$|async as emotes">
+    <div class="p-4 max-w-5xl grid gap-4 grid-cols-3 sm:grid-cols-6 md:grid-cols-9 lg:grid-cols-12">
+        <nx-twitch-emote-button *ngFor="let emote of emotes" [emote]="emote"></nx-twitch-emote-button>
+    </div>
+</ng-container>

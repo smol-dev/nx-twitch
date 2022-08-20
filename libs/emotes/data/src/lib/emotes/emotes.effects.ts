@@ -11,17 +11,21 @@ import {
   tap,
   withLatestFrom,
 } from 'rxjs/operators';
-import { EmoteActions, UserActions } from './emotes.actions';
+import { EmoteService } from '../emotes.service';
+import { TwitchService } from '../twitch.service';
+import { fromUser, UserActions } from '../users';
+import { EmoteActions } from './emotes.actions';
 import { EmoteAppState } from './emotes.reducers';
 import { fromEmote } from './emotes.selectors';
-import { EmoteService } from './emotes.service';
+
 
 @Injectable()
 export class EmoteEffects {
   constructor(
     private actions$: Actions,
     private store: Store<EmoteAppState>,
-    private service: EmoteService
+    private service: EmoteService,
+    private ttvService: TwitchService,
   ) {}
 
   getEmote$ = createEffect(() =>
@@ -40,7 +44,7 @@ export class EmoteEffects {
   loadEmotes$ = createEffect(() =>
     this.actions$.pipe(
       ofType(EmoteActions.load),
-      withLatestFrom(this.store.select(fromEmote.selectUser)),
+      withLatestFrom(this.store.select(fromUser.selectUser)),
       tap(console.debug),
       // filter((user) => user !== null),
       switchMap(([, user]) =>
@@ -58,31 +62,5 @@ export class EmoteEffects {
     )
   );
 
-  getUser$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(UserActions.getUser),
-      concatMap((action) =>
-        of(action).pipe(
-          withLatestFrom(this.store.select(fromEmote.selectLoadStatus))
-        )
-      ),
-      filter(([, loadStatus]) => loadStatus === 'NOT_LOADED'),
-      map(([{ username }]) => UserActions.loadUser({ username }))
-    )
-  );
 
-  loadUser$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(UserActions.loadUser),
-      switchMap((action) => this.service.getUser(action.username)),
-      map((user) => UserActions.loadedUser({ user }))
-    )
-  );
-
-  userLoaded$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(UserActions.loadedUser),
-      map(() => EmoteActions.load())
-    )
-  );
 }
