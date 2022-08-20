@@ -14,6 +14,7 @@ import { EmoteListComponent } from './containers/emote-list/emote-list.component
 
 const routes: Routes = [
   {
+
     path: '',
     component: EmotesContainerComponent,
     children: [

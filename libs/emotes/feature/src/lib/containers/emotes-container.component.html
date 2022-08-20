@@ -1,15 +1,16 @@
 <main class="bg-rose-500 grid place-items-center min-h-screen ">
-    <nav class="min-w-full sticky top-0 h-[10vh] bg-rose-500">
+    <nav class="min-w-full grid justify-center sticky top-0  bg-rose-500 ">
         <nx-twitch-user-card [user]="user$|async" [loadStatus]="(loadStatus$|async)!" (search)="search($event)">
         </nx-twitch-user-card>
     </nav>
 
 
-    <section class="min-w-full h-[80vh] overflow-auto ">
+    <section class="min-w-full h-[84vh]  overflow-auto grid justify-center">
         <router-outlet></router-outlet>
     </section>
 
-    <nav class="min-w-full sticky top-0 h-[10vh] bg-rose-500">
-        <h2>FOOTER</h2>
-    </nav>
+    <footer class="min-w-full sticky bottom-0 h-[8vh] bg-rose-500">
+        <form class="min-h-full 
+        justify-center items-center bg-emerald-600 border-solid border-4 border-black"></form>
+    </footer>
 </main>

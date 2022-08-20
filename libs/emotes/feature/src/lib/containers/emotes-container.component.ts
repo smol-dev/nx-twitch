@@ -22,6 +22,7 @@ export class EmotesContainerComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('yoyoyo');
+  
   }
 
   search(username: string): void {

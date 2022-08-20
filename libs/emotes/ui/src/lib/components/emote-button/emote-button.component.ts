@@ -8,13 +8,15 @@ import { UiEmote } from '@nxt-emotes/model';
 })
 export class EmoteButtonComponent implements OnInit {
   @Input() emote!: UiEmote;
+  @Input() size!: string;
+  detail = false;
 
-  get size(): string {
+  get sizeEmote(): string {
     switch (this.emote.type) {
       case 'ffz':
-        return '3';
+        return this.size;
       default:
-        return '3x';
+        return this.size + 'x';
     }
   }
 

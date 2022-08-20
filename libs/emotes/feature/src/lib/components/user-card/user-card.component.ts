@@ -11,4 +11,8 @@ export class UserCardComponent {
   @Input() loadStatus: 'NOT_LOADED' | 'LOADING' | 'LOADED' = 'NOT_LOADED';
   @Output() search = new EventEmitter<string>();
   constructor() {}
+
+  submit(term: HTMLInputElement): void {
+    this.search.emit(term.value);
+  }
 }

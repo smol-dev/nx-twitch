@@ -1,9 +1,4 @@
-<!-- <div class="p-4 border">
-    <div class="flex flex-wrap items-center  max-w-xs bg-slate-500">
-        <img src="{{emote.url}}/{{size}}" [alt]="emote.name">
-        <h3>{{emote.name}}</h3>
-    </div>
-</div> -->
-<div class="h-16 aspect-square  xs-h-auto bg-slate-900 border-solid border-4 border-emerald-700 hover:border-red-700">
-    <img src="{{emote.url}}/{{size}}" [alt]="emote.name">
+<div
+    class="w-32 m-1 aspect-square xs-h-auto bg-slate-900 border-solid border-4 border-emerald-700 hover:border-red-700 flex justify-center">
+    <img class="m-auto" type="img/ivif" src="{{emote.url}}/{{sizeEmote}}" [alt]="emote.name" title="{{emote|json}}">
 </div>
