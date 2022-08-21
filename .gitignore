@@ -40,4 +40,5 @@ Thumbs.db
 
 .angular
 
+apps/emotes/src/environments/environment.prod.ts
 apps/emotes/src/environments/environment.ts
