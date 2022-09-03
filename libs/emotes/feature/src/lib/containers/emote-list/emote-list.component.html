@@ -1,15 +1,6 @@
 <ng-container *ngIf="emotes$|async as emotes">
-
-    <div class="h-10 min-w-full flex flex-wrap justify-center  ">
-        <div class="mt-2 ">
-            <input type="checkbox" class="checkbox" #size1 />
-            <input type="checkbox" class="checkbox" #size2 />
-            <!-- <input type="checkbox" checked="checked" class="checkbox" #size3 /> -->
-        </div>
-    </div>
-
-    <div class="m-10 max-w-fit flex flex-wrap justify-center ">
-        <nx-twitch-emote-button *ngFor="let emote of emotes" [emote]="emote" [size]="size1.checked ? '1':'2'">
+    <div class="m-10 max-w-max flex flex-wrap justify-center ">
+        <nx-twitch-emote-button *ngFor="let emote of emotes" [emote]="emote" [size]="'2'">
         </nx-twitch-emote-button>
     </div>
 </ng-container>

@@ -6,7 +6,7 @@ import { EmoteActions, fromEmote } from '@nxt-emotes/data';
   selector: 'nx-twitch-emote-list',
   templateUrl: './emote-list.component.html',
   styleUrls: ['./emote-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EmoteListComponent implements OnInit {
   emotes$ = this.store.select(fromEmote.selectAll);
